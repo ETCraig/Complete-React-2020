@@ -6,7 +6,8 @@ import Header from './components/header/header.component';
 import { HomePage } from './pages/homepage/homepage.component';
 import SignInAndUpPage from './pages/sign-in-n-up/sign-in-n-up.component';
 import ShopPage from './pages/shop/shop.component'
-import { auth } from './firebase/firebasae.utils';
+import { auth, createUserProfileDocument } from './firebase/firebasae.utils';
+import { copyFile } from 'fs';
 
 class App extends Component {
   constructor() {
@@ -20,8 +21,21 @@ class App extends Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState({ currentUser: user });
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot(snapShot => {
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data()
+            }
+          });
+        });
+      } else {
+        this.setState({ currentUser: userAuth });
+      }
     });
   }
 
