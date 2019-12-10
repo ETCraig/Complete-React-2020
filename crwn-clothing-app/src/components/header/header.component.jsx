@@ -1,6 +1,9 @@
 import React from 'react';
 import './header.styles.scss';
 
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+import CartIcon from '../cart-icon/cart-icon.component';
+
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
@@ -20,11 +23,17 @@ const Header = ({ currentUser }) => (
             </Link>
             {
                 currentUser ?
-                    <div className="option" onClick={() => auth.signOut}>SIGN OUT</div>
-                    :
-                    <Link className="option" to='/signIn'>SIGN IN</Link>
+                    <div className="option" onClick={() => auth.signOut}>
+                        SIGN OUT
+                    </div>
+                :
+                    <Link className="option" to='/signIn'>
+                        SIGN IN
+                    </Link>
             }
+            <CartIcon />
         </div>
+        <CartDropdown />
     </div>
 );
 
