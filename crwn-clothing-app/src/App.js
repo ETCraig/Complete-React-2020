@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import { auth, createUserProfileDocument } from './firebase/firebasae.utils';
 import { connect } from 'react-redux';
-import { setCurrentUser } from './redux/user/user.actions';
-import { Route, Redirect, Switch } from 'react-router-dom';
 import Header from './components/header/header.component';
 import { HomePage } from './pages/homepage/homepage.component';
-import SignInAndUpPage from './pages/sign-in-n-up/sign-in-n-up.component';
+import { selectCurrentUser } from './redux/user/user.selector';
+import { setCurrentUser } from './redux/user/user.actions';
 import ShopPage from './pages/shop/shop.component'
-import { auth, createUserProfileDocument } from './firebase/firebasae.utils';
+import SignInAndUpPage from './pages/sign-in-n-up/sign-in-n-up.component';
+
+import { createStructuredSelector } from 'reselect';
+import { Route, Redirect, Switch } from 'react-router-dom';
 
 class App extends Component {
 
@@ -51,8 +54,8 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({user}) => ({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = dispatch => ({
