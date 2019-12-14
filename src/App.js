@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import { auth, createUserProfileDocument } from './firebase/firebasae.utils';
+import { addCollectionAndDocuments, auth, createUserProfileDocument } from './firebase/firebasae.utils';
 import CheckoutPage from './pages/checkout/checkout.component';
 import { connect } from 'react-redux';
 import Header from './components/header/header.component';
 import { HomePage } from './pages/homepage/homepage.component';
+import { selectCollectionsForPreview } from './redux/shop/shop.selector';
 import { selectCurrentUser } from './redux/user/user.selector';
 import { setCurrentUser } from './redux/user/user.actions';
 import ShopPage from './pages/shop/shop.component'
@@ -19,7 +20,7 @@ class App extends Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const { setCurrentUser, collectionsArray } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
@@ -33,6 +34,7 @@ class App extends Component {
         });
       } else {
         setCurrentUser(userAuth);
+        addCollectionAndDocuments('collections', collectionsArray.map(({title, items}) => ({title, items})));
       }
     });
   }
@@ -61,7 +63,8 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  setCurrentUser: user => dispatch(setCurrentUser(user)),
+  collectionsArray: selectCollectionsForPreview
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
