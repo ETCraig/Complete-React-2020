@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import { addCollectionAndDocuments, auth, createUserProfileDocument } from './firebase/firebasae.utils';
+import { auth, createUserProfileDocument } from './firebase/firebasae.utils';
 import CheckoutPage from './pages/checkout/checkout.component';
 import { connect } from 'react-redux';
 import Header from './components/header/header.component';
 import { HomePage } from './pages/homepage/homepage.component';
-import { selectCollectionsForPreview } from './redux/shop/shop.selector';
 import { selectCurrentUser } from './redux/user/user.selector';
 import { setCurrentUser } from './redux/user/user.actions';
 import ShopPage from './pages/shop/shop.component'
@@ -34,7 +33,6 @@ class App extends Component {
         });
       } else {
         setCurrentUser(userAuth);
-        addCollectionAndDocuments('collections', collectionsArray.map(({title, items}) => ({title, items})));
       }
     });
   }
@@ -59,12 +57,11 @@ class App extends Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user)),
-  collectionsArray: selectCollectionsForPreview
+  setCurrentUser: user => dispatch(setCurrentUser(user))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
