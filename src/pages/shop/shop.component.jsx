@@ -34,15 +34,15 @@ class ShopPage extends Component {
         const { loading } = this.state;
         return (
             <div className="shop-page">
-                <Route exact path={`${match.path}`} render={props => <CollectionOverviewWithSpinner isLoading={loading} {...props} />} />
-                <Route path={`${match.path}/:collectionId`} render={props => <CollectionPageWithSpinner isLoading={loading} {...props} />} />
+                <Route exact path={`${match.path}`} render={(props) => <CollectionOverviewWithSpinner isLoading={loading} {...props} />} />
+                <Route path={`${match.path}/:collectionId`} render={(props) => <CollectionPageWithSpinner isLoading={loading} {...props} />} />
             </div>
         );
     }
 }
 
 const mapDispatchToProps = dispatch => ({
-    collections: collectionsMap => dispatch(updateCollections(collectionsMap))
+    updateCollections: collectionsMap => dispatch(updateCollections(collectionsMap))
 });
 
 export default connect(null, mapDispatchToProps)(ShopPage);

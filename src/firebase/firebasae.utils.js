@@ -60,6 +60,7 @@ export const convertCollectionsSnapShotToMap = collections => {
         return {
             routeName: encodeURI(title.toLowerCase()),
             id: doc.id,
+            title,
             items
         }
     });
