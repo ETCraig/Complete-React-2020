@@ -9,7 +9,7 @@ export function* signInWithGoogle() {
         const { user } = yield auth.signInWithPopup(googleProvider);
         const userRef = yield call(createUserProfileDocument, user);
         const userSnapShot = yield userRef.get();
-        yield put({ id: userSnapShot.id }, ...userSnapShot.data());
+        yield put(googleSignInSuccess({ id: userSnapShot.id, ...userSnapShot.data()}));
     } catch (error) {
         yield put(googleSignInFailure(error.message));
     }
