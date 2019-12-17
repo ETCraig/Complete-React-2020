@@ -60,7 +60,7 @@ export function* signUp({ payload: { email, password, displayName } }) {
     }
 }
 
-export function* signInAfterSignUp(payload, { user, additionalDataF }) {
+export function* signInAfterSignUp({ payload: { user, additionalData } }) {
     yield getSnapShotFromUserAuth(user, additionalData);
 }
 
@@ -80,7 +80,7 @@ export function* onSignOutStart() {
     yield takeLatest(UserActionTypes.SIGN_OUT_START, signOut);
 }
 
-export function* signUpStart() {
+export function* onSignUpStart() {
     yield takeLatest(UserActionTypes.SIGN_UP_START, signUp);
 }
 
@@ -94,7 +94,7 @@ export function* userSagas() {
         call(onEmailSignInStart),
         call(isUserAuthenticated),
         call(onSignOutStart),
-        call(onSignOutStart),
+        call(onSignUpStart),
         call(onSignUpSuccess)
     ]);
 }
