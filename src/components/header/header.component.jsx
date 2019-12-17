@@ -6,7 +6,6 @@ import {
     OptionLink
 } from './header.styles';
 
-import { auth } from '../../firebase/firebasae.utils';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 import CartIcon from '../cart-icon/cart-icon.component';
 import { ReactComponent as Logo } from '../../assets/crown.svg';

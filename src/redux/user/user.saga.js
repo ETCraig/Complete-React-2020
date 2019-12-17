@@ -1,7 +1,7 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
 
 import { auth, createUserProfileDocument, getCurrentUser, googleProvider } from '../../firebase/firebasae.utils';
-import { signInFailure, signInSuccess, signOutFailure, signOutSuccess, signUpFailure, signUpSuccess, signUpStart } from './user.actions';
+import { signInFailure, signInSuccess, signOutFailure, signOutSuccess, signUpFailure, signUpSuccess } from './user.actions';
 import UserActionTypes from './user.types';
 
 export function* isUserAuthenticated() {
