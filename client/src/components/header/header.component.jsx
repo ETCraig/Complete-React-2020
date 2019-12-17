@@ -3,7 +3,8 @@ import {
     HeaderContainer,
     LogoContainer,
     OptionContainer,
-    OptionLink
+    OptionLink,
+    OptionButton
 } from './header.styles';
 
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
@@ -30,9 +31,9 @@ const Header = ({ currentUser, hidden, signOutStart }) => (
             </OptionLink>
             {
                 currentUser ?
-                    <OptionLink as="div" onClick={signOutStart}>
+                    <OptionButton as="div" onClick={signOutStart}>
                         SIGN OUT
-                    </OptionLink>
+                    </OptionButton>
                     :
                     <OptionLink to='/signIn'>
                         SIGN IN

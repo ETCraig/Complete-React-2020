@@ -27,3 +27,8 @@ export const OptionLink = styled(Link)`
     padding: 10px 15px;
     cursor: pointer;
 `;
+
+export const OptionButton = styled.div`
+    padding: 10px 15px;
+    cursor: pointer;
+`;
