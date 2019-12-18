@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './sign-up.styles.scss';
+import { SignUpContainer, SignUpTitle } from './sign-up.styles';
 
 import CustomButton from '../custom-button/custom-button.component';
 import FormInput from '../form-input/form-input.component';
@@ -30,12 +30,12 @@ const SignUp = ({ signUpStart }) => {
 
     const handleChange = e => {
         const { name, value } = e.target;
-        setCredentials({...credentials, [name]: value });
+        setCredentials({ ...credentials, [name]: value });
     }
 
     return (
-        <div className="sign-up">
-            <h2 className="title">I do not have an account</h2>
+        <SignUpContainer>
+            <SignUpTitle>I do not have an account</SignUpTitle>
             <span>Sign up with your email and password</span>
             <form className="sign-up-form" onSubmit={handleSubmit}>
                 <FormInput
@@ -72,7 +72,7 @@ const SignUp = ({ signUpStart }) => {
                 />
                 <CustomButton type="submit">Sign Up</CustomButton>
             </form>
-        </div>
+        </SignUpContainer>
     );
 }
 
