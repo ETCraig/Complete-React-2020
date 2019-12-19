@@ -7,7 +7,6 @@ import {
 } from './cart-dropdown.styles';
 
 import CartItem from '../cart-item/cart-item.component';
-import CustomButton from '../custom-button/custom-button.component';
 import { selectCartItems } from '../../redux/cart/cart.selector';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
