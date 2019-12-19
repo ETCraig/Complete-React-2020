@@ -2,6 +2,7 @@ import React, { useEffect, lazy, Suspense } from 'react';
 import { GlobalStyle } from './global.styles';
 
 import { checkUserSession } from './redux/user/user.actions';
+import ErrorBoundary from './components/error-boundary/error-boundary.component';
 import Header from './components/header/header.component';
 import { selectCurrentUser } from './redux/user/user.selector';
 import Spinner from './components/spinner/spinner.component';
@@ -26,12 +27,14 @@ const App = ({ checkUserSession, currentUser }) => {
       <GlobalStyle />
       <Header />
       <Switch>
-        <Suspense fallback={<Spinner />}>
-          <Route exact path='/' component={HomePage} />
-          <Route path='/shop' component={ShopPage} />
-          <Route exact path='/checkout' component={CheckoutPage} />
-          <Route exact path='/signIn' render={() => currentUser ? <Redirect to='/' /> : <SignInAndUpPage />} />
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={<Spinner />}>
+            <Route exact path='/' component={HomePage} />
+            <Route path='/shop' component={ShopPage} />
+            <Route exact path='/checkout' component={CheckoutPage} />
+            <Route exact path='/signIn' render={() => currentUser ? <Redirect to='/' /> : <SignInAndUpPage />} />
+          </Suspense>
+        </ErrorBoundary>
       </Switch>
     </div>
   );
